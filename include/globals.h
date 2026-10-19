@@ -1,0 +1,90 @@
+/*
+ * Copyright 2026 California High Robotics, Team 1516X
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+#pragma once
+#define DISTANCE_SENSORS_ENABLED 1
+
+#include "IntakeAntiJam.h"
+#include "pros/distance.hpp"
+#include "lemlib/chassis/chassis.hpp"
+#include "pros/adi.hpp"
+#include "pros/optical.hpp"
+#include "pros/vision.hpp"
+#include "colorSort.h"
+#include "Chassis.h"
+
+struct State {
+    float x, y, heading, linear_vel, angular_vel;
+};
+
+// Controller
+extern pros::Controller controller;
+
+// Motor groups
+extern pros::MotorGroup rightMotors;
+extern pros::MotorGroup leftMotors;
+extern pros::MotorGroup lift;
+
+// Drivetrain
+extern lemlib::Drivetrain drivebase;
+
+// Sensors
+extern pros::IMU imu;
+extern pros::Rotation horizontal_tracking_sensor;
+
+extern lemlib::TrackingWheel horizontal_tracking_wheel;
+
+extern lemlib::OdomSensors sensors;
+
+// PID controllers
+extern lemlib::ControllerSettings lateral_controller;
+extern lemlib::ControllerSettings angular_controller;
+
+// Drive curves
+extern lemlib::ExpoDriveCurve throttle_curve;
+extern lemlib::ExpoDriveCurve steer_curve;
+
+// Chassis
+extern Chassis chassis;
+
+// Individual motors
+extern pros::Motor toggleMotor;
+extern pros::Motor clawMotor;
+extern pros::Motor intakeMotor;
+extern pros::Motor outtakeMotor;
+extern pros::Motor storageMotor;
+
+// Distance sensors
+#if DISTANCE_SENSORS_ENABLED
+extern pros::Distance rightDistance;
+extern pros::Distance leftDistance;
+extern pros::Distance frontDistance;
+extern pros::Distance backDistance;
+#endif
+// Pneumatics
+extern pros::adi::Pneumatics intake_lift;
+extern pros::adi::Pneumatics hood;
+extern pros::adi::Pneumatics matchloader;
+extern pros::adi::Pneumatics descore;
+extern pros::adi::Pneumatics mid_descore;
+
+// Optical & vision sensors
+extern pros::Optical color_sensor;
+extern pros::Vision vision_sensor;
+extern pros::AIVision* aiVisionSensor;
+
+// Robot state variables
+extern Color allianceColor;
+extern bool color_sort_enable;
+extern bool midgoal_first;
+extern int ramp_up_time;
+extern int low_ramp_down_time;
+extern bool skills;
+extern bool antiJamEnabled;
+extern bool liveReplay;
+extern bool auton_selected;
+extern std::atomic<bool> abortAuton;
+
+extern IntakeAntiJam jamManager;

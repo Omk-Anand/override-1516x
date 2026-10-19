@@ -1,0 +1,52 @@
+// Copyright 2026 California High Robotics, Team 1516X
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+#include "RCL.h"
+#include "distanceReset.h"
+#include "globals.h"
+
+RCL_Controller rcl;
+
+void RCL_Controller::start() {
+    if (running.exchange(true)) {
+    return; 
+    }
+
+    task = std::make_unique<pros::Task>([this]() {
+    const double alpha = 0.1; 
+    
+    while (running) {
+        distancePose targetXY = distanceReset(false, true, 2, 10); 
+        has_x_correction.store(!targetXY.using_odom_x);
+        has_y_correction.store(!targetXY.using_odom_y);
+        
+        lemlib::Pose currentPose = chassis.getPose(); 
+        
+        float newX = currentPose.x + alpha * (targetXY.x - currentPose.x);
+        float newY = currentPose.y + alpha * (targetXY.y - currentPose.y);
+        
+        chassis.setPose({newX, newY, currentPose.theta}); 
+        pros::delay(50); 
+    }
+    }, "RCL Task");
+}
+
+void RCL_Controller::end() {
+    if (running.exchange(false)) {
+        has_x_correction.store(false);
+        has_y_correction.store(false);
+        pros::delay(60); 
+    }
+}
+
+bool RCL_Controller::isRunning() const {
+    return running.load();
+}
+
+bool RCL_Controller::hasXCorrection() const {
+    return has_x_correction.load();
+}
+
+bool RCL_Controller::hasYCorrection() const {
+    return has_y_correction.load();
+}
