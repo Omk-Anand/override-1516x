@@ -21,9 +21,9 @@
 #include "distanceReset.h"
 #include "auton/autonFunctions.h"
 #include "motorDashboard.h"
-#include "IntakeAntiJam.h"
 #include "localization/AprilTagLocalization.hpp"
 #include <memory>
+#include <iostream>
 
 LV_IMG_DECLARE(callogo);
 
@@ -46,7 +46,7 @@ static void update_alliance_btn(lv_obj_t* btn, Color newColor) {
 static void alliance_btn_event_handler(lv_event_t* e) {
     lv_obj_t* btn = lv_event_get_target(e);
 
-    if (allianceColor == RED) {
+    if (allianceColor == Color::RED) {
         allianceColor = Color::BLUE;
     } else {
         allianceColor = Color::RED;
@@ -63,27 +63,17 @@ void create_alliance_selector() {
     lv_obj_align(btn, LV_ALIGN_BOTTOM_RIGHT, -10, -10);
     lv_obj_set_size(btn, 80, 40);
 
-    lv_obj_set_style_bg_color(btn, lv_palette_main(LV_PALETTE_RED), 0);
-
     lv_obj_t* label = lv_label_create(btn);
-    lv_label_set_text(label, "RED");
     lv_obj_center(label);
+    update_alliance_btn(btn, allianceColor);
 
     lv_obj_add_event_cb(btn, alliance_btn_event_handler, LV_EVENT_CLICKED, nullptr);
 }
 
-/*
 rd::Selector selector({
-    {"Right 7 Split", right_auton_split},
-    {"Right 7 Wing", right_7_wing},
-    {"Right Rush", right_rush},
-    {"Left 7 Block", left_auton_split},
-    {"Left Rush", left_rush},
-    {"AWP", awp_auton},
-    {"Skills", skills_auton},
-    {"Carry", carry_auton}
+    {"Left Auton", left_auton},
+    {"Right Auton", right_auton}
 });
-*/
 
 rd::Console console;
 rd::Image image = rd::Image(&callogo, "logo");
@@ -167,7 +157,7 @@ void competition_initialize() {
 }
 
 void autonomous() {
-	left_auton();
+    selector.run_auton();
 }
 //Min turn: Sensitvity at low speed
 //Max Turn: Sensitivity at high speed
@@ -212,7 +202,7 @@ void opcontrol() {
 			!toggle_task_running.exchange(true)) {
 			toggle_stop_requested.store(false);
 			pros::Task toggle_task([]() {
-				spinToggleUntilColor(Color::BLUE, &toggle_stop_requested);
+				spinToggleUntilColor(allianceColor, &toggle_stop_requested);
 				toggle_task_running.store(false);
 			});
 		}

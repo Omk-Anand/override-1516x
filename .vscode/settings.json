@@ -1,0 +1,94 @@
+{
+  "clangd.arguments": [
+    "--query-driver=**/arm-none-eabi-g++.exe"
+  ],
+  "workbench.colorCustomizations": {
+    "editor.background": "#1E1E2E",
+    "editor.foreground": "#BAC2DE",
+    "editorLineNumber.foreground": "#6C7086",
+    "editorLineNumber.activeForeground": "#F5E0DC",
+    "editorCursor.foreground": "#F5C2E7",
+    "editor.selectionBackground": "#45475A",
+    "editor.inactiveSelectionBackground": "#313244"
+  },
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": ["comment", "punctuation.definition.comment"],
+        "settings": {
+          "foreground": "#7F849C",
+          "fontStyle": "italic"
+        }
+      },
+      {
+        "scope": ["keyword", "storage", "storage.type", "storage.modifier"],
+        "settings": {
+          "foreground": "#CBA6F7"
+        }
+      },
+      {
+        "scope": ["string", "string.quoted", "constant.other.symbol"],
+        "settings": {
+          "foreground": "#A6E3A1"
+        }
+      },
+      {
+        "scope": ["constant.numeric", "constant.language", "constant.character"],
+        "settings": {
+          "foreground": "#FAB387"
+        }
+      },
+      {
+        "scope": ["entity.name.function", "support.function"],
+        "settings": {
+          "foreground": "#89B4FA"
+        }
+      },
+      {
+        "scope": [
+          "entity.name.type",
+          "entity.name.class",
+          "entity.name.struct",
+          "support.type",
+          "support.class"
+        ],
+        "settings": {
+          "foreground": "#F9E2AF"
+        }
+      },
+      {
+        "scope": ["variable.parameter", "variable.other"],
+        "settings": {
+          "foreground": "#B4BEFE"
+        }
+      },
+      {
+        "scope": ["entity.name.namespace", "entity.name.enum"],
+        "settings": {
+          "foreground": "#94E2D5"
+        }
+      },
+      {
+        "scope": ["keyword.operator", "punctuation"],
+        "settings": {
+          "foreground": "#89DCEB"
+        }
+      }
+    ]
+  },
+  "editor.semanticTokenColorCustomizations": {
+    "enabled": true,
+    "rules": {
+      "class": "#F9E2AF",
+      "enum": "#F9E2AF",
+      "enumMember": "#FAB387",
+      "function": "#89B4FA",
+      "method": "#89B4FA",
+      "namespace": "#94E2D5",
+      "parameter": "#F38BA8",
+      "property": "#F5C2E7",
+      "type": "#F9E2AF",
+      "variable": "#B4BEFE"
+    }
+  }
+}

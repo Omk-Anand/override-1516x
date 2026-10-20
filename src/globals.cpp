@@ -9,8 +9,6 @@
 #include "pros/adi.hpp"
 #include "pros/optical.hpp"
 #include "pros/vision.hpp"
-#include "colorSort.h"
-#include "IntakeAntiJam.h"
 #include "Chassis.h"
 
 pros::Controller controller(pros::E_CONTROLLER_MASTER);

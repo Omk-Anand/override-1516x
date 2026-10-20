@@ -8,8 +8,6 @@
 #include "pros/rtos.hpp"
 #include <cmath>
 #include <sys/types.h>
-#include "colorSort.h"
-#include "IntakeAntiJam.h"
 #include "ltv.h"
 
 
@@ -22,4 +20,3 @@ const VelocityControllerConfig config{
 10.933332351,
 44.6788428062,
 };
-

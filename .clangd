@@ -1,4 +1,5 @@
 ---
 # ARM compiler specific, not supported by clang
 CompileFlags:
+  Compiler: arm-none-eabi-g++
   Remove: [-mcpu=*, -mfloat-abi=*, -mfpu=*]

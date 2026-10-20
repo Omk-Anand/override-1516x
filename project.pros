@@ -1,7 +1,7 @@
 {
     "py/object": "pros.conductor.project.Project",
     "py/state": {
-        "project_name": "omkar_loves_lucas",
+        "project_name": "override_x",
         "target": "v5",
         "templates": {
             "LemLib": {

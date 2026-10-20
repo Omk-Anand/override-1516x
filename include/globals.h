@@ -6,7 +6,6 @@
 #pragma once
 #define DISTANCE_SENSORS_ENABLED 1
 
-#include "IntakeAntiJam.h"
 #include "pros/distance.hpp"
 #include "lemlib/chassis/chassis.hpp"
 #include "pros/adi.hpp"
@@ -82,9 +81,6 @@ extern bool midgoal_first;
 extern int ramp_up_time;
 extern int low_ramp_down_time;
 extern bool skills;
-extern bool antiJamEnabled;
 extern bool liveReplay;
 extern bool auton_selected;
 extern std::atomic<bool> abortAuton;
-
-extern IntakeAntiJam jamManager;

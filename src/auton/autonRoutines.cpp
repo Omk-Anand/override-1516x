@@ -1,7 +1,6 @@
 // Copyright 2026 California High Robotics, Team 1516X
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include "IntakeAntiJam.h"
 #include "globals.h" 
 #include "auton/autonRoutines.h"
 #include "auton/autonFunctions.h"
@@ -12,41 +11,14 @@
 #include "velocityController.h"
 #include "paths.h"
 #include "distanceReset.h"
-#include "colorSort.h"
-#include "crossBarrierDetection.h"
 #include <cstdlib>
 #include <atomic>
 #include <map>
 #include <sys/types.h>
 #include "RCL.h"
 
-const int longgoal_delay = 2000;
-const int midgoal_delay = 3000;
-const int matchload_delay = 1500;
-const int mid_triball_delay = 500;
-const int longgoal_offset = 12;
-const int midgoal_offset = 12;
-const int matchload_offset = 12.9;
-const int triball_delay = 500;
-const int dual_ball_delay = 500;
 
-/*
 
-Straight:
-KV = 5.83366315659
-1.14915679465
-0.277890461166
-11.8794542097
-59.3640060487
-
-Turn:
-6.69921571762
-1.01377617649
-0.956265367397
-14.8634454339
-101.977995601
-
-*/
 
 
 
@@ -116,7 +88,7 @@ void precompute_auton_paths(std::string path_name) {
 
 void left_auton() {
     chassis.setPose(0, 0, 0);
-    spinToggleUntilColor(Color::BLUE);
+    spinToggleUntilColor(allianceColor);
 
     std::atomic<bool> keep_claw_closing{true};
     std::atomic<bool> claw_close_task_finished{false};
@@ -152,7 +124,7 @@ void left_auton() {
 
 void right_auton() {
     chassis.setPose(0, 0, 0);
-    spinToggleUntilColor(Color::BLUE);
+    spinToggleUntilColor(allianceColor);
 
     std::atomic<bool> keep_claw_closing{true};
     std::atomic<bool> claw_close_task_finished{false};
