@@ -86,7 +86,7 @@ std::atomic<bool> toggle_stop_requested{false};
 
 void initialize() {
 	lift.set_brake_mode_all(pros::E_MOTOR_BRAKE_HOLD);
-	clawMotor.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	clawMotor.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	chassis.calibrate();
 	motor_disconnect_warning();
     create_alliance_selector();

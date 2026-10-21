@@ -28,5 +28,5 @@ void claw_control(ClawAction action) {
 }
 
 void claw_idle() {
-    clawMotor.move_voltage(update_torque_limit() ? -6000 : 0);
+    clawMotor.move_voltage(0);
 }
